@@ -41,3 +41,14 @@ describe('Deoptimization', () => {
 		testUpdateArg({}, 1);
 	});
 });
+
+
+describe('No Deopts', () => {
+	it('object rebuild', () => {
+		function objRebuild(a) {
+			return Object.assign({ b: 'value' }, a);
+		}
+		%OptimizeFunctionOnNextCall(objRebuild);
+		objRebuild({ a: 'value' });
+	});
+});
